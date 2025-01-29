@@ -1,0 +1,10 @@
+.datatime-range {
+    display: flex;
+    gap: 8px;
+}
+.datatime-range__input {
+}
+.datatime-range__input .filters-input__field {
+}
+.datatime-range__input .filters-input__button {
+}

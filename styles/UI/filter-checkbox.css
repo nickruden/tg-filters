@@ -1,0 +1,41 @@
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+.filter-checkbox__old {
+    display: none;
+}
+.filter-checkbox__new {
+    height: 16px;
+    width: 16px;
+    position: relative;
+    border: 1px solid #0074D9;
+    border-radius: 4px;
+    position: relative;
+}
+.filter-checkbox__new::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 10px;
+    border: solid #FFF;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -65%) rotate(45deg);
+    display: none;
+}
+.filter-checkbox__old:checked + .filter-checkbox__new {
+    background: #0074D9;
+}
+.filter-checkbox__old:checked + .filter-checkbox__new::after {
+    display: block;
+}
+.filter-checkbox__text {
+    font-family: "Commissioner";
+    font-size: 14px;
+    font-weight: 400;
+    color: #242424;
+}

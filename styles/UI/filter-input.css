@@ -1,0 +1,30 @@
+.filters-input {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    border: 1px solid #C8C8C8;
+    border-radius: 4px;
+    width: 100%;
+    padding: 8px 16px;
+}
+.filters-input > [class*="button"], .filters-input > [class*="icon"] {
+    display: none;
+}
+.--icon > [class*="button"], .--icon > [class*="icon"] {
+    display: block;
+}
+.filters-input__field {
+    font-family: "Commissioner";
+    font-size: 14px;
+    font-weight: 400;
+    color: #242424;
+    width: 100%;
+}
+.filters-input__field::placeholder {
+    color: #C8C8C8;
+}
+.filters-input__button {
+    background: none;
+    max-width: 16px;
+    max-height: 16px;
+}

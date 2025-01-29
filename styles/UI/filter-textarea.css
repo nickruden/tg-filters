@@ -1,0 +1,16 @@
+.filters-textarea {
+}
+.filters-textarea__field {
+    font-family: "Commissioner";
+    font-size: 14px;
+    font-weight: 400;
+    color: #242424;
+    padding: 8px 16px;
+    border: 1px solid #C8C8C8;
+    border-radius: 4px;
+    width: 100%;
+    resize: none;
+}
+.filters-textarea__field::placeholder {
+    color: #C8C8C8;
+}

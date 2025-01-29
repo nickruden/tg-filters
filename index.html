@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Фильтры</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Commissioner:100,200,300,regular,500,600,700,800,900"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+    <link rel="stylesheet" href="./styles/reset.css">
+
+    <link rel="stylesheet" href="./styles/UI/filter-input.css">
+    <link rel="stylesheet" href="./styles/UI/filter-select.css">
+    <link rel="stylesheet" href="./styles/UI/filter-checkbox.css">
+    <link rel="stylesheet" href="./styles/UI/filter-dropdown.css">
+    <link rel="stylesheet" href="./styles/UI/filter-textarea.css">
+    <link rel="stylesheet" href="./styles/UI/filter-doubleInput.css">
+    <link rel="stylesheet" href="./styles/UI/filter-datatimePicker.css">
+
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="filters">
+            <div class="my-container filters__container">
+                <h2 class="filters__title">Фильтры</h2>
+                <div class="filters__wrapper">
+                    <form action="" class="filters__elements filters-form">
+                        <!-- ПЕРВЫЙ БЛОК ФИЛЬТРОВ -->
+                        <div class="filters-form__block">
+                            <div class="filters-form__block-header"></div>
+                            <div class="filters-form__block-content">
+                                <!-- ТЕКСТОВОЕ ПОЛЕ С ИКОНКОЙ (без надписи) -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top"></div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-input --icon filters-form__input">
+                                            <input type="text" name="searchInput" id="searchInput"
+                                                class="filters-input__field" placeholder="Поиск по реестру">
+                                            <button class="filters-input__button">
+                                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0_3229_1397)">
+                                                        <path d="M10.1824 11.0776L14.9124 15.8079" stroke="#0074D9"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path
+                                                            d="M2.33104 3.25321C1.84029 3.86071 1.48304 4.56521 1.27954 5.31946C0.481795 8.29046 2.24755 11.3447 5.21854 12.1427C8.18954 12.9372 11.2405 11.1747 12.0383 8.20371C12.8328 5.23271 11.0703 2.17846 8.09929 1.38046C6.50029 0.953205 4.79129 1.26021 3.43929 2.21821"
+                                                            stroke="#0074D9" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path
+                                                            d="M4.267 3.25C3.42575 3.82425 2.81825 4.67875 2.5545 5.6635C2.371 6.34775 2.361 7.06875 2.52775 7.7565"
+                                                            stroke="#0074D9" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_3229_1397">
+                                                            <rect width="16" height="16" fill="white"
+                                                                transform="translate(0 0.5)" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ВЫПАДАЮЩИЙ СПИСОК С НЕСКОЛЬКИМИ ЗНАЧЕНИЯМИ И ПОИСКОМ ПО НИМ -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="legislativeAct" class="filters-form__element-lable">Нормативно
+                                            правовой акт</label>
+                                        <button class="filters-form__element-clear" data-target="legislativeAct">Очистить</button>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-select filters-form__select">
+                                            <div class="filters-select__header">
+                                                <input type="text" name="legislativeAct" id="legislativeAct" class="filters-select__field"
+                                                    placeholder="Не выбрано">
+                                                <div class="filters-select__icon">
+                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2.73389 6.1582L7.99989 12.4342" stroke="#0074D9" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path d="M8 12.4342L13.266 6.1582" stroke="#0074D9" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="filters-select__dropdown" data-dropdown-content="legislativeAct">
+                                                <div class="filters-select__dropdown-body">
+                                                    <div class="filters-select__dropdown-top">
+                                                        <div class="filters-input --icon filters-select__dropdown-input">
+                                                            <input type="text" name="legislativeActsearchInput" id="legislativeActsearchInput" class="filters-input__field"
+                                                                placeholder="Поиск по реестру">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-options" data-simplebar>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">178-ФЗ</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">ПП РФ 1361</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">ПП Москвы 714-ПП</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">Приказ ФАС России № 147/23</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">ПП ДНР 53-8</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">ПП РФ-1206</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">178-ФЗ</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filters-select__dropdown-option">
+                                                            <div class="filters-select__dropdown-option-content">
+                                                                <label class="filter-checkbox">
+                                                                    <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                                    <span class="filter-checkbox__new"></span>
+                                                                    <span class="filter-checkbox__text">178-ФЗ</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ВЫПАДАЮЩИЙ СПИСОК С ОДНИМ ЗНАЧЕНИЕМ -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="stateControl" class="filters-form__element-lable">Орган
+                                            контроля</label>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-select filters-form__select">
+                                            <div class="filters-select__header">
+                                                <input type="text" name="stateControl" id="stateControl"
+                                                    class="filters-select__field" placeholder="Не выбрано">
+                                                <div class="filters-select__icon">
+                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2.73389 6.1582L7.99989 12.4342" stroke="#0074D9"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M8 12.4342L13.266 6.1582" stroke="#0074D9"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="filters-select__dropdown" data-dropdown-content="stateControl">
+                                            <div class="filters-select__dropdown-body">
+                                                <div class="filters-select__dropdown-options" data-simplebar>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИНГУШСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            КАЛМЫЦКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИВАНОВСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИВАНОВСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИВАНОВСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИВАНОВСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИВАНОВСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            ИВАНОВСКОЕ УФАС РОССИИ
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ЧЕКБОКСЫ -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top"></div>
+                                    <div class="filters-form__element-content">
+                                        <label class="filter-checkbox">
+                                            <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                            <span class="filter-checkbox__new"></span>
+                                            <span class="filter-checkbox__text">178-ФЗ</span>
+                                        </label>
+                                        <label class="filter-checkbox">
+                                            <input type="checkbox" name="" id="" class="filter-checkbox__old" checked>
+                                            <span class="filter-checkbox__new"></span>
+                                            <span class="filter-checkbox__text">178-ФЗ</span>
+                                        </label>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- БЛОК ФИЛЬТРОВ "ПАРМЕТРЫ" -->
+                        <div class="filters-form__block">
+                            <div class="filters-form__block-header">
+                                <div class="filters-form__block-title --title-section">
+                                    <h3 class="filters-form__block-title-text">Параметры</h3>
+                                    <button class="filters-form__block-title-button">
+                                        <div class="filters-select__icon">
+                                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2.73389 6.1582L7.99989 12.4342" stroke="#0074D9"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8 12.4342L13.266 6.1582" stroke="#0074D9"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="filters-form__block-content">
+                                <!-- ПОЛЕ ДИАПАЗОНА -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="startPrice" class="filters-form__element-lable">Начальная цена</label>
+                                        <button class="filters-form__element-clear" data-target="price">Очистить</button>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-double-input filters-form__double-input">
+                                            <div class="filters-input filters-double-input__input-field-wrap">
+                                                <input type="text" name="priceStart" id="priceStart" class="filters-input__field" placeholder="от">
+                                            </div>
+                                            <span class="filters-double-input__separator"></span>
+                                            <div class="filters-input filters-double-input__input-field-wrap">
+                                                <input type="text" name="priceEnd" id="priceEnd" class="filters-input__field" placeholder="до">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ДАТАПИКЕР -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="dateFrom" class="filters-form__element-lable">Дата окончания срока подачи заявок</label>
+                                        <button class="filters-form__element-clear" data-target="date">Очистить</button>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="datatime-range filters-form__datatime-reange">
+                                            <div class="filters-input --icon datatime-range__input">
+                                                <input type="text" name="dateFrom" id="dateFrom" class="filters-input__field flatpickr-input" placeholder="дд.мм.гггг">
+                                                <button class="filters-input__button" data-toggle="dateFrom">
+                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_3230_1493)">
+                                                            <path d="M0.365479 2.81427H15.6345V12.9013L13.5802 14.9585H0.365479V2.81427Z" stroke="#0074D9"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M0.365479 5.58124H15.6345" stroke="#0074D9" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M13.5803 14.9585V12.9012H15.6346" stroke="#0074D9" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M2.86987 1.758V4.35775" stroke="#0074D9" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M13.1299 1.758V4.35775" stroke="#0074D9" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M2.46326 8.33673H1.44751V9.35248H2.46326V8.33673Z" fill="#0074D9" />
+                                                            <path d="M4.88098 8.33673H3.86523V9.35248H4.88098V8.33673Z" fill="#0074D9" />
+                                                            <path d="M7.29895 8.33673H6.2832V9.35248H7.29895V8.33673Z" fill="#0074D9" />
+                                                            <path d="M9.71692 8.33673H8.70117V9.35248H9.71692V8.33673Z" fill="#0074D9" />
+                                                            <path d="M12.1346 8.33673H11.1189V9.35248H12.1346V8.33673Z" fill="#0074D9" />
+                                                            <path d="M14.5526 8.33673H13.5369V9.35248H14.5526V8.33673Z" fill="#0074D9" />
+                                                            <path d="M2.46326 10.365H1.44751V11.3807H2.46326V10.365Z" fill="#0074D9" />
+                                                            <path d="M4.88098 10.365H3.86523V11.3807H4.88098V10.365Z" fill="#0074D9" />
+                                                            <path d="M7.29895 10.365H6.2832V11.3807H7.29895V10.365Z" fill="#0074D9" />
+                                                            <path d="M9.71692 10.365H8.70117V11.3807H9.71692V10.365Z" fill="#0074D9" />
+                                                            <path d="M12.1346 10.365H11.1189V11.3807H12.1346V10.365Z" fill="#0074D9" />
+                                                            <path d="M14.5526 10.365H13.5369V11.3807H14.5526V10.365Z" fill="#0074D9" />
+                                                            <path d="M2.46326 12.3935H1.44751V13.4092H2.46326V12.3935Z" fill="#0074D9" />
+                                                            <path d="M4.88098 12.3935H3.86523V13.4092H4.88098V12.3935Z" fill="#0074D9" />
+                                                            <path d="M7.29895 12.3935H6.2832V13.4092H7.29895V12.3935Z" fill="#0074D9" />
+                                                            <path d="M9.71692 12.3935H8.70117V13.4092H9.71692V12.3935Z" fill="#0074D9" />
+                                                            <path d="M12.1346 12.3935H11.1189V13.4092H12.1346V12.3935Z" fill="#0074D9" />
+                                                            <path d="M2.50501 6.28674H1.48926V7.30249H2.50501V6.28674Z" fill="#0074D9" />
+                                                            <path d="M4.88098 6.30823H3.86523V7.32398H4.88098V6.30823Z" fill="#0074D9" />
+                                                            <path d="M7.29895 6.30823H6.2832V7.32398H7.29895V6.30823Z" fill="#0074D9" />
+                                                            <path d="M9.71692 6.30823H8.70117V7.32398H9.71692V6.30823Z" fill="#0074D9" />
+                                                            <path d="M12.1346 6.30823H11.1189V7.32398H12.1346V6.30823Z" fill="#0074D9" />
+                                                            <path d="M14.5526 6.30823H13.5369V7.32398H14.5526V6.30823Z" fill="#0074D9" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_3230_1493">
+                                                                <rect width="16" height="16" fill="white" transform="translate(0 0.5)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="filters-input --icon datatime-range__input">
+                                                <input type="text" name="dateTo" id="dateTo" class="filters-input__field flatpickr-input" placeholder="дд.мм.гггг">
+                                                <button class="filters-input__button" data-toggle="dateTo">
+                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clip-path="url(#clip0_3230_1493)">
+                                                            <path d="M0.365479 2.81427H15.6345V12.9013L13.5802 14.9585H0.365479V2.81427Z" stroke="#0074D9"
+                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M0.365479 5.58124H15.6345" stroke="#0074D9" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M13.5803 14.9585V12.9012H15.6346" stroke="#0074D9" stroke-linecap="round"
+                                                                stroke-linejoin="round" />
+                                                            <path d="M2.86987 1.758V4.35775" stroke="#0074D9" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M13.1299 1.758V4.35775" stroke="#0074D9" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M2.46326 8.33673H1.44751V9.35248H2.46326V8.33673Z" fill="#0074D9" />
+                                                            <path d="M4.88098 8.33673H3.86523V9.35248H4.88098V8.33673Z" fill="#0074D9" />
+                                                            <path d="M7.29895 8.33673H6.2832V9.35248H7.29895V8.33673Z" fill="#0074D9" />
+                                                            <path d="M9.71692 8.33673H8.70117V9.35248H9.71692V8.33673Z" fill="#0074D9" />
+                                                            <path d="M12.1346 8.33673H11.1189V9.35248H12.1346V8.33673Z" fill="#0074D9" />
+                                                            <path d="M14.5526 8.33673H13.5369V9.35248H14.5526V8.33673Z" fill="#0074D9" />
+                                                            <path d="M2.46326 10.365H1.44751V11.3807H2.46326V10.365Z" fill="#0074D9" />
+                                                            <path d="M4.88098 10.365H3.86523V11.3807H4.88098V10.365Z" fill="#0074D9" />
+                                                            <path d="M7.29895 10.365H6.2832V11.3807H7.29895V10.365Z" fill="#0074D9" />
+                                                            <path d="M9.71692 10.365H8.70117V11.3807H9.71692V10.365Z" fill="#0074D9" />
+                                                            <path d="M12.1346 10.365H11.1189V11.3807H12.1346V10.365Z" fill="#0074D9" />
+                                                            <path d="M14.5526 10.365H13.5369V11.3807H14.5526V10.365Z" fill="#0074D9" />
+                                                            <path d="M2.46326 12.3935H1.44751V13.4092H2.46326V12.3935Z" fill="#0074D9" />
+                                                            <path d="M4.88098 12.3935H3.86523V13.4092H4.88098V12.3935Z" fill="#0074D9" />
+                                                            <path d="M7.29895 12.3935H6.2832V13.4092H7.29895V12.3935Z" fill="#0074D9" />
+                                                            <path d="M9.71692 12.3935H8.70117V13.4092H9.71692V12.3935Z" fill="#0074D9" />
+                                                            <path d="M12.1346 12.3935H11.1189V13.4092H12.1346V12.3935Z" fill="#0074D9" />
+                                                            <path d="M2.50501 6.28674H1.48926V7.30249H2.50501V6.28674Z" fill="#0074D9" />
+                                                            <path d="M4.88098 6.30823H3.86523V7.32398H4.88098V6.30823Z" fill="#0074D9" />
+                                                            <path d="M7.29895 6.30823H6.2832V7.32398H7.29895V6.30823Z" fill="#0074D9" />
+                                                            <path d="M9.71692 6.30823H8.70117V7.32398H9.71692V6.30823Z" fill="#0074D9" />
+                                                            <path d="M12.1346 6.30823H11.1189V7.32398H12.1346V6.30823Z" fill="#0074D9" />
+                                                            <path d="M14.5526 6.30823H13.5369V7.32398H14.5526V6.30823Z" fill="#0074D9" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_3230_1493">
+                                                                <rect width="16" height="16" fill="white" transform="translate(0 0.5)" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ТЕКСТОВОЕ ПОЛЕ БЕЗ ИКОНКИ (с надписью) -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="elem2" class="filters-form__element-lable">Номер извещения</label>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-input filters-form__input">
+                                            <input type="text" name="elem2" id="elem2" class="filters-input__field"
+                                                placeholder="Ваш номер извещения">
+                                            <div class="filters-input__icon">
+                                                <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0_3229_1397)">
+                                                        <path d="M10.1824 11.0776L14.9124 15.8079" stroke="#0074D9"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path
+                                                            d="M2.33104 3.25321C1.84029 3.86071 1.48304 4.56521 1.27954 5.31946C0.481795 8.29046 2.24755 11.3447 5.21854 12.1427C8.18954 12.9372 11.2405 11.1747 12.0383 8.20371C12.8328 5.23271 11.0703 2.17846 8.09929 1.38046C6.50029 0.953205 4.79129 1.26021 3.43929 2.21821"
+                                                            stroke="#0074D9" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                        <path
+                                                            d="M4.267 3.25C3.42575 3.82425 2.81825 4.67875 2.5545 5.6635C2.371 6.34775 2.361 7.06875 2.52775 7.7565"
+                                                            stroke="#0074D9" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_3229_1397">
+                                                            <rect width="16" height="16" fill="white"
+                                                                transform="translate(0 0.5)" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ВЫПАДАЮЩИЙ СПИСОК С ОДНИМ ЗНАЧЕНИЕМ -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="legislativeAct" class="filters-form__element-lable">Наличие
+                                            жалоб</label>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-select filters-form__select">
+                                            <div class="filters-select__header">
+                                                <input type="text" name="complaints" id="complaints" class="filters-select__field" placeholder="Не выбрано">
+                                                <div class="filters-select__icon">
+                                                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2.73389 6.1582L7.99989 12.4342" stroke="#0074D9"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M8 12.4342L13.266 6.1582" stroke="#0074D9"
+                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="filters-select__dropdown" data-dropdown-content="complaints">
+                                            <div class="filters-select__dropdown-body">
+                                                <div class="filters-select__dropdown-options" data-simplebar>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            Есть жалобы
+                                                        </div>
+                                                    </div>
+                                                    <div class="filters-select__dropdown-option">
+                                                        <div class="filters-select__dropdown-option-content">
+                                                            Нет жалоб
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+
+                                <!-- ТЕКСТОВАЯ ОБЛАСТЬ -->
+                                <div class="filters-form__element">
+                                    <div class="filters-form__element-top">
+                                        <label for="elem2" class="filters-form__element-lable">Местонахождение
+                                            имущества</label>
+                                        <button class="filters-form__element-clear" data-target="location">Очистить</button>
+                                    </div>
+                                    <div class="filters-form__element-content">
+                                        <div class="filters-textarea filters-form__textarea">
+                                            <textarea name="location" id="location" class="filters-textarea__field" rows="3"
+                                                placeholder="Введите адрес"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="filters-form__element-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- БЛОК-ЭЛЕМЕНТ ФИЛЬТРОВ КАТЕГОРИЯ -->
+                         <!-- ЕСТЬ НЕСКОЛЬКО ВАРИАНТОВ РЕАЛИЗАЦИИ:
+                         1) Если использовать динамическую подстановку данных, то создаётся внутри контента блока два элемента, один для хранения выбранных категорий и один для выпадающего списка каждой категории (сделан сейчас и самый нормальный);
+                         2) Если не использовать динамиечскую подстановку данных, то создаётся внутри контента блока три элемента, один для храения выбранных категорий, второй для хранения выпадающего списка общих категорий, третий для первой подкатегории и её списка, и четвёртый для второй подкатегории и выпадающего списка. (вариант очень простой, но объёмный) -->
+                        <div class="filters-form__block category-block">
+                            <div class="filters-form__block-header">
+                                <div class="filters-form__block-title --title-section">
+                                    <h3 class="filters-form__block-title-text">Категория</h3>
+                                    <button class="filters-form__block-title-button">
+                                        <div class="filters-select__icon">
+                                            <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2.73389 6.1582L7.99989 12.4342" stroke="#0074D9"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8 12.4342L13.266 6.1582" stroke="#0074D9"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="filters-form__block-content category-block__content">
+                                <div class="category-block__selected-categories">
+                                    <div class="category-block__selected-category"></div>
+                                </div>
+                                <div class="category-block__dropdown">
+                                    <div class="category-block__dropdown-options" data-simplebar>
+                                        <div class="category-block__dropdown-option">Транспорт</div>
+                                        <div class="category-block__dropdown-option">Недвижимость</div>
+                                        <div class="category-block__dropdown-option">Земельные участки</div>
+                                        <div class="category-block__dropdown-option">Акции и Доли</div>
+                                        <div class="category-block__dropdown-option">Права пользования и лицензии</div>
+                                        <div class="category-block__dropdown-option">Строительство и развитие территорий</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="./assets/scripts/filters-select.js"></script>
+<script src="./assets/scripts/filter-textarea.js"></script>
+<script src="./assets/scripts/filter-doubleInput.js"></script>
+<script src="./assets/scripts/filter-dataPicker.js"></script>
+<script src="./assets/scripts/filter-block-category.js"></script>
+
+</html>

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     rangeInputs.forEach(rangeInput => {
         const startInput = rangeInput.querySelector('.filters-input__field[name="priceStart"]');
         const endInput = rangeInput.querySelector('.filters-input__field[name="priceEnd"]');
-        const rangeId = startInput.getAttribute('id').replace('Start', '');
+        const rangeId = startInput.getAttribute('data-range-id');
 
         filtersData[rangeId] = {
             type: `range${rangeId}`,
@@ -44,16 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (value) {
                 value = Number(value).toLocaleString('ru-RU');
                 event.target.value = value;
-            }
-
-            // Проверяем значение end относительно start
-            if (filtersData[rangeId].start && parseInt(value.replace(/,/g, '')) < parseInt(filtersData[rangeId].start.replace(/,/g, ''))) {
-                endInput.placeholder = 'Значение меньше чем начальное';
-                endInput.value = '';
-                filtersData[rangeId].end = '';
-            } else {
-                endInput.placeholder = 'до';
-                filtersData[rangeId].end = event.target.value;
             }
 
             updateClearButtonVisibility(rangeId);

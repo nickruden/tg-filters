@@ -275,9 +275,9 @@
                         </div>
 
                         <!-- БЛОК ФИЛЬТРОВ "ПАРМЕТРЫ" -->
-                        <div class="filters-form__block">
+                        <div class="filters-form__block dropdown-content-block">
                             <div class="filters-form__block-header">
-                                <div class="filters-form__block-title --title-section">
+                                <div class="filters-form__block-title --title-section" data-toggle="options">
                                     <h3 class="filters-form__block-title-text">Параметры</h3>
                                     <button class="filters-form__block-title-button">
                                         <div class="filters-select__icon">
@@ -292,21 +292,21 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="filters-form__block-content">
+                            <div class="filters-form__block-content" data-block-content="options">
                                 <!-- ПОЛЕ ДИАПАЗОНА -->
                                 <div class="filters-form__element">
                                     <div class="filters-form__element-top">
                                         <label for="startPrice" class="filters-form__element-lable">Начальная цена</label>
-                                        <button class="filters-form__element-clear" data-target="price">Очистить</button>
+                                        <button class="filters-form__element-clear" data-target="price1">Очистить</button>
                                     </div>
                                     <div class="filters-form__element-content">
                                         <div class="filters-double-input filters-form__double-input">
                                             <div class="filters-input filters-double-input__input-field-wrap">
-                                                <input type="text" name="priceStart" id="priceStart" class="filters-input__field" placeholder="от">
+                                                <input type="text" name="priceStart" data-range-id="price1" class="filters-input__field" placeholder="от">
                                             </div>
                                             <span class="filters-double-input__separator"></span>
                                             <div class="filters-input filters-double-input__input-field-wrap">
-                                                <input type="text" name="priceEnd" id="priceEnd" class="filters-input__field" placeholder="до">
+                                                <input type="text" name="priceEnd" data-range-id="price1" class="filters-input__field" placeholder="до">
                                             </div>
                                         </div>
                                     </div>
@@ -513,12 +513,9 @@
                         </div>
 
                         <!-- БЛОК-ЭЛЕМЕНТ ФИЛЬТРОВ КАТЕГОРИЯ -->
-                         <!-- ЕСТЬ НЕСКОЛЬКО ВАРИАНТОВ РЕАЛИЗАЦИИ:
-                         1) Если использовать динамическую подстановку данных, то создаётся внутри контента блока два элемента, один для хранения выбранных категорий и один для выпадающего списка каждой категории (сделан сейчас и самый нормальный);
-                         2) Если не использовать динамиечскую подстановку данных, то создаётся внутри контента блока три элемента, один для храения выбранных категорий, второй для хранения выпадающего списка общих категорий, третий для первой подкатегории и её списка, и четвёртый для второй подкатегории и выпадающего списка. (вариант очень простой, но объёмный) -->
-                        <div class="filters-form__block category-block">
+                        <div class="filters-form__block dropdown-content-block category-block">
                             <div class="filters-form__block-header">
-                                <div class="filters-form__block-title --title-section">
+                                <div class="filters-form__block-title --title-section" data-toggle="category">
                                     <h3 class="filters-form__block-title-text">Категория</h3>
                                     <button class="filters-form__block-title-button">
                                         <div class="filters-select__icon">
@@ -533,10 +530,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="filters-form__block-content category-block__content">
-                                <div class="category-block__selected-categories">
-                                    <div class="category-block__selected-category"></div>
-                                </div>
+                            <div class="filters-form__block-content category-block__content" data-block-content="category">
+                                <div class="category-block__selected-categories"></div>
                                 <div class="category-block__dropdown">
                                     <div class="category-block__dropdown-options" data-simplebar>
                                         <div class="category-block__dropdown-option">Транспорт</div>
@@ -564,5 +559,31 @@
 <script src="./assets/scripts/filter-doubleInput.js"></script>
 <script src="./assets/scripts/filter-dataPicker.js"></script>
 <script src="./assets/scripts/filter-block-category.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Находим все элементы с атрибутом data-toggle
+    const toggleButtons = document.querySelectorAll('[data-toggle]');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Получаем значение атрибута data-toggle, которое соответствует data-block-content
+            const target = this.getAttribute('data-toggle');
+            const blockContent = document.querySelector(`[data-block-content="${target}"]`);
+
+            if (blockContent) {
+                // Переключаем класс для отображения/скрытия блока
+                blockContent.classList.toggle('active');
+
+                // Опционально: можно добавить анимацию или изменить иконку
+                const icon = this.querySelector('.filters-select__icon svg');
+                if (icon) {
+                    icon.classList.toggle('rotated');
+                }
+            }
+        });
+    });
+});
+</script>
 
 </html>

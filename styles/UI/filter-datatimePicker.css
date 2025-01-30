@@ -4,6 +4,9 @@
 }
 .datatime-range__input {
 }
+.flatpickr-input ~ .flatpickr-calendar {
+    display: none;
+}
 .datatime-range__input .filters-input__field {
 }
 .datatime-range__input .filters-input__button {

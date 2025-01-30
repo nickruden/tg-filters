@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const input = header.querySelector('input');
         const inputId = input.getAttribute('id');
         const dropdown = document.querySelector(`.filters-select__dropdown[data-dropdown-content="${inputId}"]`);
+        const icon = header.querySelector('.filters-select__icon svg');
         if (!dropdown) return;
 
         input.readOnly = true;
@@ -36,12 +37,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         header.addEventListener('click', function (event) {
-            if (dropdown) {
+             if (dropdown) {
                 event.stopPropagation();
+                const isOpen = dropdown.classList.contains('--open');
                 dropdown.classList.toggle('--open');
+
+                // Добавляем или убираем класс для поворота стрелочки
+                if (icon) {
+                    icon.classList.toggle('rotated', !isOpen);
+                }
+
                 document.querySelectorAll('.filters-select__dropdown.--open').forEach(otherDropdown => {
                     if (otherDropdown !== dropdown) {
                         otherDropdown.classList.remove('--open');
+                        const otherIcon = otherDropdown.closest('.filters-select').querySelector('.filters-select__icon svg');
+                         if (otherIcon) {
+                            otherIcon.classList.remove('rotated');
+                        }
                     }
                 });
             }
@@ -99,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!event.target.closest('.filters-select')) {
             document.querySelectorAll('.filters-select__dropdown.--open').forEach(dropdown => {
                 dropdown.classList.remove('--open');
+                const icon = dropdown.closest('.filters-select').querySelector('.filters-select__icon svg');
+                if (icon) {
+                    icon.classList.remove('rotated');
+                }
             });
         }
     });

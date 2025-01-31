@@ -25,6 +25,12 @@
 .filters-select__icon {
     max-width: 16px;
     max-height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
 }
 
 .filters-select__dropdown {

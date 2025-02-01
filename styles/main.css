@@ -130,8 +130,6 @@
 
 /* БЛОК КАТЕГОРИИ */
 .category-block {
-    overflow: hidden; /* Скрываем переполнение */
-    transition: height 0.3s ease; /* Плавный переход высоты */
 }
 .category-block .filters-form__block-header {
     padding-bottom: 12px;
@@ -161,6 +159,20 @@
     gap: 12px;
 }
 .category-block__selected-category {
+    font-weight: 600;
+    color: #242424;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.category-block__selected-category[data-type="subcategory"] {
+    padding-left: 16px;
+}
+.category-block__selected-category::before {
+    content: url('../assets/icon_right.svg');
+    max-height: 16px;
+    max-width: 16px;
 }
 .category-block__selected-category:last-child {
     padding-bottom: 12px;
@@ -176,6 +188,10 @@
 }
 .category-block__dropdown-option {
     padding: 8px 0px;
+    cursor: pointer;
+}
+.category-block__dropdown-option[data-type="subcategory"] {
+    padding: 8px 0px 8px 20px;
     cursor: pointer;
 }
 .category-block__dropdown-option:hover, .category-block__dropdown-option:active, .category-block__dropdown-option:focus {
@@ -211,5 +227,3 @@
 .simplebar-scrollbar.simplebar-visible:before {
     opacity: 1;
 }
-
-

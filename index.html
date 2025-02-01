@@ -704,6 +704,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
 
 <script src="./assets/scripts/filters-select.js"></script>
 <script src="./assets/scripts/filter-textarea.js"></script>
@@ -712,32 +713,41 @@
 <script src="./assets/scripts/filter-block-category.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const toggleButtons = document.querySelectorAll('[data-toggle]');
+    document.addEventListener('DOMContentLoaded', function () {
+    const headers = document.querySelectorAll('.filters-form__block-header');
 
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', function (event) {
-            event.preventDefault(); // Предотвращаем обновление страницы
+    headers.forEach(header => {
+        const checkButton = header.querySelector('[data-toggle]');
+        if (checkButton) {
+            header.style.cursor = "pointer";
+        }
 
-            const toggleType = this.getAttribute('data-toggle');
-            const contentBlock = document.querySelector(`[data-block-content="${toggleType}"]`);
-            const header = this.closest('.filters-form__block-header'); // Находим хедер
-            const buttonIcon = this.querySelector('.filters-select__icon');
+        header.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const toggleButton = header.querySelector('[data-toggle]');
+            if (!toggleButton) {
+                return;
+            }
+
+            const toggleType = toggleButton.getAttribute('data-toggle');
+            const contentBlock = document.querySelector(`.dropdown-content-block [data-block-content="${toggleType}"]`);
+            const buttonIcon = toggleButton.querySelector('.filters-select__icon');
 
             if (contentBlock) {
+                // Обработка для блоков, которые не являются .category-block
                 if (header.classList.contains('active')) {
-                    // Закрываем блок
                     contentBlock.style.height = '0px';
                     header.classList.remove('active');
                     buttonIcon.classList.remove('rotated');
+                    contentBlock.classList.remove('open');
                 } else {
-                    // Открываем блок
                     contentBlock.style.height = `${contentBlock.scrollHeight}px`;
                     header.classList.add('active');
                     buttonIcon.classList.add('rotated');
+                    contentBlock.classList.add('open');
                 }
 
-                // Обновляем высоту, если контент изменился
                 contentBlock.addEventListener('transitionend', function () {
                     if (contentBlock.style.height !== '0px') {
                         contentBlock.style.height = 'auto';
@@ -761,7 +771,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Наблюдаем за изменениями в блоках контента
     const contentBlocks = document.querySelectorAll('.filters-form__block-content');
     contentBlocks.forEach(block => {
         observer.observe(block, { childList: true, attributes: true, subtree: true });

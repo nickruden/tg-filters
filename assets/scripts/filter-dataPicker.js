@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Инициализация Flatpickr
             const flatpickrInstance = initFlatpickr(inputId, {
                 dateFormat: 'd.m.Y',
+                locale: 'ru',
                 minDate: isFromInput ? 'today' : null, // Для поля "от" запрещаем прошедшие даты
                 disableMobile: 'true',
                 onOpen: function (selectedDates, dateStr, instance) {

@@ -87,10 +87,10 @@
 
 
 /* БЛОК С ЗАГОЛОВКОМ И СПИСКОМ ЭЛЕМЕНТОВ */
-.dropdown-content-block:not(.category-block) .filters-form__block-content {
-    height: 0px;
+.dropdown-content-block .filters-form__block-content {
+    transition: max-height 0.5s ease;
     overflow: hidden;
-    transition: height 0.7s ease;
+    max-height: 0;
 }
 
 .dropdown-content-block .filters-form__block-header:not(:empty) + .filters-form__block-content .filters-form__block-content-inner {
@@ -136,7 +136,7 @@
     border-bottom: 0px solid #C8C8C8;
 }
 .category-block .filters-form__block-header.no-empty {
-    padding-bottom: 12px;
+    padding-bottom: 16px;
     border-bottom: 0px solid #C8C8C8;
 }
 .category-block .filters-form__block-header.empty.active {
@@ -174,7 +174,7 @@
     max-height: 16px;
     max-width: 16px;
 }
-.category-block__selected-category:last-child {
+.category-block__selected-category:last-child:not([data-type="subcategory"]) {
     padding-bottom: 12px;
     border-bottom: 1px solid #C8C8C8;
 }
@@ -198,9 +198,9 @@
     background-color: #f0f3ff;
 }
 .category-block .filters-form__block-content {
-    height: 0px;
+    transition: max-height 0.5s ease;
     overflow: hidden;
-    transition: height 0.7s ease;
+    max-height: 0;
 }
 
 .simplebar-track.simplebar-vertical {

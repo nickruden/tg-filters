@@ -1,6 +1,9 @@
+import { updateStore } from "./store.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
+    updateStore("dateData", filtersData)
 
     // Функция для инициализации Flatpickr
     function initFlatpickr(inputId, options) {
@@ -17,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         datePickers.forEach(input => {
             const inputId = input.id;
             const rangeId = inputId.replace(/From|To/, ''); // Получаем общий идентификатор (например, "date" или "date2")
-            const isFromInput = inputId.endsWith('From'); // Проверяем, это поле "от" или "до"
+            const isFromInput = inputId.endsWith('From');
 
             // Инициализация Flatpickr
             const flatpickrInstance = initFlatpickr(inputId, {
@@ -32,16 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 onClose: function (selectedDates, dateStr, instance) {
                     const calendarContainer = instance.calendarContainer;
                     calendarContainer.style.display = 'none';
-
                 },
                 onChange: function (selectedDates, dateStr) {
-                    // Сохраняем выбранную дату в filtersData
                     if (!filtersData[rangeId]) {
                         filtersData[rangeId] = { from: '', to: '' };
                     }
                     filtersData[rangeId][isFromInput ? 'from' : 'to'] = dateStr;
 
-                    // Если это поле "от", обновляем минимальную дату для поля "до"
                     if (isFromInput) {
                         const toInputId = inputId.replace('From', 'To');
                         const toInput = document.getElementById(toInputId);
@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     updateClearButtonVisibility(rangeId);
-                    console.log(filtersData); // Выводим текущее состояние filtersData
+                    console.log(filtersData);
+                    updateStore("dateData", filtersData)
                 }
             });
 
@@ -66,16 +67,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
-    // Инициализация всех датапикеров
     initDatePickers();
-
 
     // Обработчик для кнопок "Очистить"
     clearButtons.forEach(button => {
         button.addEventListener('click', function (event) {
             event.preventDefault();
-            const target = this.getAttribute('data-target'); // Получаем data-target (например, "date" или "date2")
+            const target = this.getAttribute('data-target');
             const fromInput = document.getElementById(`${target}From`);
             const toInput = document.getElementById(`${target}To`);
 
@@ -90,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             updateClearButtonVisibility(target);
+            updateStore("dateData", filtersData)
             console.log(filtersData); // Выводим текущее состояние filtersData
         });
     });

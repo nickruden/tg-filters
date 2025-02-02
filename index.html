@@ -660,7 +660,7 @@
 
                         <!-- БЛОК-ЭЛЕМЕНТ ФИЛЬТРОВ КАТЕГОРИЯ -->
                         <div class="filters-form__block dropdown-content-block category-block">
-                            <div class="filters-form__block-header">
+                            <div class="filters-form__block-header category-block__header">
                                 <div class="filters-form__block-title --title-section" data-toggle="category">
                                     <h3 class="filters-form__block-title-text">Категория</h3>
                                     <button class="filters-form__block-title-button">
@@ -696,7 +696,7 @@
                             </div>
                         </div>
                         <div class="filters-form__block dropdown-content-block category-block">
-                            <div class="filters-form__block-header">
+                            <div class="filters-form__block-header category-block__header">
                                 <div class="filters-form__block-title --title-section" data-toggle="category2">
                                     <h3 class="filters-form__block-title-text">Категория</h3>
                                     <button class="filters-form__block-title-button">
@@ -742,11 +742,13 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
 
-<script src="./assets/scripts/filters-select.js"></script>
-<script src="./assets/scripts/filter-textarea.js"></script>
-<script src="./assets/scripts/filter-doubleInput.js"></script>
-<script src="./assets/scripts/filter-dataPicker.js"></script>
-<script src="./assets/scripts/filter-block-category.js"></script>
+<script type="module" src="./assets/scripts/store.js"></script>
+
+<script type="module" src="./assets/scripts/filters-select.js"></script>
+<script type="module" src="./assets/scripts/filter-textarea.js"></script>
+<script type="module" src="./assets/scripts/filter-doubleInput.js"></script>
+<script type="module" src="./assets/scripts/filter-dataPicker.js"></script>
+<script type="module" src="./assets/scripts/filter-block-category.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -765,15 +767,14 @@
             const toggleType = toggleButton.getAttribute('data-toggle');
             const contentBlock = document.querySelector(`.dropdown-content-block [data-block-content="${toggleType}"]`);
             const buttonIcon = toggleButton.querySelector('.filters-select__icon');
+            
             if (contentBlock) {
                 if (header.classList.contains('active')) {
-                    // Закрываем блок
                     contentBlock.style.maxHeight = '0px';
                     header.classList.remove('active');
                     buttonIcon.classList.remove('rotated');
                     contentBlock.classList.remove('open');
                 } else {
-                    // Открываем блок
                     contentBlock.style.maxHeight = `${contentBlock.scrollHeight}px`;
                     header.classList.add('active');
                     buttonIcon.classList.add('rotated');

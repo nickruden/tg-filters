@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const filterSelectHeaders = document.querySelectorAll('.filters-select__header');
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
-    const filtersData = {}; // все данные, абсолютно всех селектов храняться тут, если селект одиночный, можно вытащить из input.value
+    const filtersData = {};
 
     filterSelectHeaders.forEach(header => {
         const input = header.querySelector('input');

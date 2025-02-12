@@ -4,8 +4,8 @@ let timeoutId;
 
 export function updateStore(key, value) {
   filtersData[key] = value;
-  // console.log(filtersData)
-  debouncedFetch();
+  console.log(Object.values(filtersData))
+  // debouncedFetch();
 }
 
 function debouncedFetch() {

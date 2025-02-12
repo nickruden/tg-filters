@@ -1,7 +1,11 @@
+import {updateStore} from './store.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     const textAreas = document.querySelectorAll('.filters-textarea textarea');
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
+
+    updateStore('textareasData', filtersData);
 
     textAreas.forEach(textArea => {
         const textAreaId = textArea.getAttribute('id');
@@ -20,8 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
         textArea.addEventListener('input', function(event) {
-             filtersData[textAreaId].value = event.target.value;
-              updateClearButtonVisibility(textAreaId);
+            filtersData[textAreaId].value = event.target.value;
+            updateClearButtonVisibility(textAreaId);
+        })
+
+        textArea.addEventListener('blur', function(event) {
+            updateStore('textareasData', filtersData);
         })
     });
 

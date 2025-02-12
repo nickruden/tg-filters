@@ -1,13 +1,18 @@
+import { updateStore } from "./store.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     const filterSelectHeaders = document.querySelectorAll('.filters-select__header');
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
+
+    updateStore('selectsData', filtersData);
 
     filterSelectHeaders.forEach(header => {
         const input = header.querySelector('input');
         const inputId = input.getAttribute('id');
         const dropdown = document.querySelector(`.filters-select__dropdown[data-dropdown-content="${inputId}"]`);
         const icon = header.querySelector('.filters-select__icon svg');
+
         if (!dropdown) return;
 
         input.readOnly = true;
@@ -15,8 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const hasCheckboxes = dropdown.querySelector('.filters-select__dropdown-option input[type="checkbox"]');
         filtersData[inputId] = {
             type: hasCheckboxes ? 'checkbox' : 'select',
-            selected: [],
-            value: '',
+            ...(hasCheckboxes ? { selected: [] } : { value: '', }),
         };
 
         const footer = header.closest('.filters-form__element').querySelector('.filters-form__element-footer');
@@ -82,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (option) {
                     const checkbox = option.querySelector('input[type="checkbox"]');
                     if (checkbox) {
-                        const optionText = checkbox.nextElementSibling.nextElementSibling.textContent;
+                        const optionText = checkbox.nextElementSibling.nextElementSibling.textContent.trim().replace(/\s+/g, ' ');
                         checkbox.checked = !checkbox.checked;
                         if (checkbox.checked) {
                             if (!filtersData[inputId].selected.includes(optionText)) { // Проверка на уникальность
@@ -126,8 +130,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (filtersData[inputId].type === 'checkbox') {
             updateInputValue(input, filtersData[inputId].selected);
             updateFooter(inputId, footer);
+            updateStore('selectsData', filtersData);
         } else {
             input.value = filtersData[inputId].value;
+            updateStore('selectsData', filtersData);
         }
     }
 

@@ -3,7 +3,7 @@ import { updateStore } from "./store.js";
 document.addEventListener('DOMContentLoaded', function () {
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
-    updateStore("dateData", filtersData)
+    updateStore("dateFiltersData", filtersData);
 
     // Функция для инициализации Flatpickr
     function initFlatpickr(inputId, options) {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     updateClearButtonVisibility(rangeId);
                     console.log(filtersData);
-                    updateStore("dateData", filtersData)
+                    updateStore("dateFiltersData", filtersData)
                 }
             });
 
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             updateClearButtonVisibility(target);
-            updateStore("dateData", filtersData)
+            updateStore("dateFiltersData", filtersData)
             console.log(filtersData); // Выводим текущее состояние filtersData
         });
     });

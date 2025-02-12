@@ -1,32 +1,44 @@
-// store.js
-export const filtersData = {}; // Глобальный объект для хранения данных
+export const filtersData = {};
 
 let timeoutId;
 
-// Функция для обновления данных в хранилище
 export function updateStore(key, value) {
   filtersData[key] = value;
-  console.log(filtersData)
-//   debouncedSendToServer(); // Отправляем данные на сервер с дебаунсом
+  // console.log(filtersData)
+  debouncedFetch();
 }
 
-// Функция для отправки данных на сервер с задержкой (дебаунс)
-function debouncedSendToServer() {
+function debouncedFetch() {
   clearTimeout(timeoutId);
   timeoutId = setTimeout(() => {
     sendToServer(filtersData);
-  }, 300); // Задержка 300 мс
+  }, 300);
 }
 
-// Функция отправки данных на сервер
-function sendToServer(data) {
-  fetch('/api/update', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+const buildQueryString = (data) => {
+  let params = [];
+  // console.log(Object.entries(data));
+
+  Object.entries(data).map(([key, value]) => {
+    Object.entries(value).map(([key, value]) => {
+      let mergeData = `${key}=${value.value}`
+      // console.log(key, value, mergeData)
   })
-    .then((response) => response.json())
-    .catch((error) => console.error('Ошибка при отправке данных:', error));
+  })
+
+  return params.join('&');
+}
+
+function sendToServer(data) {
+  const queryString = buildQueryString(data);
+  // console.log(queryString)
+  // fetch('/api/update', {
+  //   method: 'POST',
+  //   body: JSON.stringify(data),
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // })
+  //   .then((response) => response.json())
+  //   .catch((error) => console.error('Ошибка при отправке данных:', error));
 }

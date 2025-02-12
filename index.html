@@ -83,8 +83,9 @@
                                         <div class="filters-form__element-content">
                                             <div class="filters-select filters-form__select">
                                                 <div class="filters-select__header">
-                                                    <input type="text" name="legislativeAct" id="legislativeAct" data-select-type=""
-                                                        class="filters-select__field" placeholder="Не выбрано">
+                                                    <input type="text" name="legislativeAct" id="legislativeAct"
+                                                        data-select-type="" class="filters-select__field"
+                                                        placeholder="Не выбрано">
                                                     <div class="filters-select__icon">
                                                         <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -283,15 +284,16 @@
                                         <div class="filters-form__element-top"></div>
                                         <div class="filters-form__element-content">
                                             <label class="filter-checkbox">
-                                                <input type="checkbox" name="" id="" class="filter-checkbox__old">
+                                                <input type="checkbox" name="checboxFz178" id="checboxFz178"
+                                                    class="filter-checkbox__old" data-value="fz178">
                                                 <span class="filter-checkbox__new"></span>
                                                 <span class="filter-checkbox__text">178-ФЗ</span>
                                             </label>
                                             <label class="filter-checkbox">
-                                                <input type="checkbox" name="" id="" class="filter-checkbox__old"
-                                                    checked>
+                                                <input type="checkbox" name="checboxFz1782" id="checboxFz1782"
+                                                    class="filter-checkbox__old" data-value="fz1782">
                                                 <span class="filter-checkbox__new"></span>
-                                                <span class="filter-checkbox__text">178-ФЗ</span>
+                                                <span class="filter-checkbox__text">178-ФЗ2</span>
                                             </label>
                                         </div>
                                         <div class="filters-form__element-footer"></div>
@@ -713,66 +715,68 @@
 <script type="module" src="./assets/scripts/filter-doubleInput.js"></script>
 <script type="module" src="./assets/scripts/filter-dataPicker.js"></script>
 <script type="module" src="./assets/scripts/filter-block-category.js"></script>
+<script type="module" src="./assets/scripts/simple-element-parsing.js"></script>
 
+<!-- СКРИПТ ДЛЯ РАСКРЫТИЯ БЛОКОВ -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const headers = document.querySelectorAll('.filters-form__block-header');
-    headers.forEach(header => {
-        const checkButton = header.querySelector('[data-toggle]');
-        if (checkButton) {
-            header.style.cursor = "pointer";
-        }
-        header.addEventListener('click', function (event) {
-            event.preventDefault();
-            const toggleButton = header.querySelector('[data-toggle]');
-            if (!toggleButton) {
-                return;
+        const headers = document.querySelectorAll('.filters-form__block-header');
+        headers.forEach(header => {
+            const checkButton = header.querySelector('[data-toggle]');
+            if (checkButton) {
+                header.style.cursor = "pointer";
             }
-            const toggleType = toggleButton.getAttribute('data-toggle');
-            const contentBlock = document.querySelector(`.dropdown-content-block [data-block-content="${toggleType}"]`);
-            const buttonIcon = toggleButton.querySelector('.filters-select__icon');
-            
-            if (contentBlock) {
-                if (header.classList.contains('active')) {
-                    contentBlock.style.maxHeight = '0px';
-                    header.classList.remove('active');
-                    buttonIcon.classList.remove('rotated');
-                    contentBlock.classList.remove('open');
-                } else {
-                    contentBlock.style.maxHeight = `${contentBlock.scrollHeight}px`;
-                    header.classList.add('active');
-                    buttonIcon.classList.add('rotated');
-                    contentBlock.classList.add('open');
+            header.addEventListener('click', function (event) {
+                event.preventDefault();
+                const toggleButton = header.querySelector('[data-toggle]');
+                if (!toggleButton) {
+                    return;
                 }
-                // Обработка завершения анимации
-                contentBlock.addEventListener('transitionend', function () {
-                    if (contentBlock.style.maxHeight !== '0px') {
-                        contentBlock.style.maxHeight = 'none'; // Сбрасываем ограничение после анимации
+                const toggleType = toggleButton.getAttribute('data-toggle');
+                const contentBlock = document.querySelector(`.dropdown-content-block [data-block-content="${toggleType}"]`);
+                const buttonIcon = toggleButton.querySelector('.filters-select__icon');
+
+                if (contentBlock) {
+                    if (header.classList.contains('active')) {
+                        contentBlock.style.maxHeight = '0px';
+                        header.classList.remove('active');
+                        buttonIcon.classList.remove('rotated');
+                        contentBlock.classList.remove('open');
+                    } else {
+                        contentBlock.style.maxHeight = `${contentBlock.scrollHeight}px`;
+                        header.classList.add('active');
+                        buttonIcon.classList.add('rotated');
+                        contentBlock.classList.add('open');
                     }
-                }, { once: true });
-            }
+                    // Обработка завершения анимации
+                    contentBlock.addEventListener('transitionend', function () {
+                        if (contentBlock.style.maxHeight !== '0px') {
+                            contentBlock.style.maxHeight = 'none'; // Сбрасываем ограничение после анимации
+                        }
+                    }, { once: true });
+                }
+            });
+        });
+
+        // Обработка динамического изменения контента
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                    const openBlocks = document.querySelectorAll('.filters-form__block-content[style*="max-height"]');
+                    openBlocks.forEach(block => {
+                        if (block.style.maxHeight !== '0px') {
+                            block.style.maxHeight = `${block.scrollHeight}px`; // Обновляем max-height при изменении контента
+                        }
+                    });
+                }
+            });
+        });
+
+        const contentBlocks = document.querySelectorAll('.filters-form__block-content');
+        contentBlocks.forEach(block => {
+            observer.observe(block, { childList: true, attributes: true, subtree: true });
         });
     });
-
-    // Обработка динамического изменения контента
-    const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(mutation => {
-            if (mutation.type === 'childList' || mutation.type === 'attributes') {
-                const openBlocks = document.querySelectorAll('.filters-form__block-content[style*="max-height"]');
-                openBlocks.forEach(block => {
-                    if (block.style.maxHeight !== '0px') {
-                        block.style.maxHeight = `${block.scrollHeight}px`; // Обновляем max-height при изменении контента
-                    }
-                });
-            }
-        });
-    });
-
-    const contentBlocks = document.querySelectorAll('.filters-form__block-content');
-    contentBlocks.forEach(block => {
-        observer.observe(block, { childList: true, attributes: true, subtree: true });
-    });
-});
 </script>
 
 </html>

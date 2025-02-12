@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
 
-    // Инициализация хранилища
-    updateStore('selectsData', selectsData);
-
     filterSelectHeaders.forEach(header => {
         const input = header.querySelector('input');
         const inputId = input.getAttribute('id');
@@ -167,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const searchInput = dropdownBody.querySelector('.filters-select__dropdown-input input');
             if (searchInput) {
-                console.log(searchInput)
                 searchInput.addEventListener('input', function (event) {
                     const searchText = event.target.value.toLowerCase();
                     const options = dropdownBody.querySelectorAll('.filters-select__dropdown-option');

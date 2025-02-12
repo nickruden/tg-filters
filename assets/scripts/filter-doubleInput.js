@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const rangeInputs = document.querySelectorAll('.filters-double-input');
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
-    updateStore("doubleInputsData", filtersData);
 
     rangeInputs.forEach(rangeInput => {
         const startInput = rangeInput.querySelector('.filters-input__field[name*="Start"]');

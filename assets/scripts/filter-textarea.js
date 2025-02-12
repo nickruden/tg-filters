@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
 
-    updateStore('textareasData', filtersData);
-
     textAreas.forEach(textArea => {
         const textAreaId = textArea.getAttribute('id');
         filtersData[textAreaId] = {

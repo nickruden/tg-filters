@@ -3,7 +3,6 @@ import { updateStore } from "./store.js";
 document.addEventListener('DOMContentLoaded', function () {
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
-    updateStore("dateFiltersData", filtersData);
 
     // Функция для инициализации Flatpickr
     function initFlatpickr(inputId, options) {

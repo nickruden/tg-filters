@@ -3,9 +3,7 @@ import { updateStore } from './store.js';
 document.addEventListener('DOMContentLoaded', function () {
     const blockStates = {};
 
-    updateStore('categoryBlocksData', blockStates);
-
-    // Данные для категорий и подкатегорий, организованные по ID блоков
+    // Для инициалиции надо
     const categoriesData = {
         category: { // ID блока
             Транспорт: {
@@ -136,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const dropdownOptions = document.querySelector(
             `[data-block-content="${blockId}"] .category-block__dropdown-options`
         );
-        console.log(options)
         if (!dropdownOptions) return;
         dropdownOptions.innerHTML = '';
         options.forEach((option) => {
@@ -167,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Функция для выбора опции
     function selectOption(blockId, option) {
         const state = getBlockState(blockId);
-        console.log(blockStates)
 
         // выбрана глобальная категория
         if (option.subcategories) {
@@ -343,7 +339,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const caregoryHeaders = document.querySelectorAll(
         '.category-block .filters-form__block-header'
     );
-    console.log(caregoryHeaders);
     caregoryHeaders.forEach((header) => {
         const toggleButton = header.querySelector('[data-toggle]');
         if (!toggleButton) return;

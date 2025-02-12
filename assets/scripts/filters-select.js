@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectType = selectsData[inputId].type;
         filtersData[inputId] = {
             type: selectType,
-            ...(selectType === 'checkbox' ? { selected: [] } : { value: '' })
+            value: selectType === 'checkbox' ? [] : null // Инициализируем значение
         };
 
         const footer = header.closest('.filters-form__element').querySelector('.filters-form__element-footer');
@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
             clearButton.addEventListener('click', function (event) {
                 event.preventDefault();
                 if (selectType === 'checkbox') {
-                    filtersData[inputId].selected = [];
+                    filtersData[inputId].value = []; // Очищаем массив
                     const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
                     checkboxes.forEach(checkbox => (checkbox.checked = false));
                 } else {
-                    filtersData[inputId].value = '';
+                    filtersData[inputId].value = null; // Сбрасываем значение
                 }
                 updateInputAndFooter(inputId, footer);
                 updateClearButtonVisibility(inputId);
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         const dropdownBody = dropdown.querySelector('.filters-select__dropdown-body');
-        const dropdownOptions = dropdown.querySelector('.filters-select__dropdown-options')
+        const dropdownOptions = dropdown.querySelector('.filters-select__dropdown-options');
         if (dropdownBody) {
             dropdownOptions.innerHTML = ''; // Очищаем существующие опции
 
@@ -119,8 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const optionContent = document.createElement('div');
                     optionContent.classList.add('filters-select__dropdown-option-content');
                     optionContent.textContent = option.name;
-
-                    
                     optionContent.dataset.optionId = option.id;
 
                     optionElement.appendChild(optionContent);
@@ -138,13 +136,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const checkbox = option.querySelector('input[type="checkbox"]');
                 if (checkbox) {
                     const optionId = checkbox.value;
-                    const optionName = option.querySelector('.filter-checkbox__text').textContent;
 
                     if (checkbox.checked) {
-                        filtersData[inputId].selected.push({ id: optionId, name: optionName });
+                        filtersData[inputId].value.push(optionId); // Добавляем id в массив
                     } else {
-                        filtersData[inputId].selected = filtersData[inputId].selected.filter(
-                            item => item.id !== optionId
+                        filtersData[inputId].value = filtersData[inputId].value.filter(
+                            id => id !== optionId // Удаляем id из массива
                         );
                     }
                 }
@@ -152,8 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const optionContent = option.querySelector('.filters-select__dropdown-option-content');
                 if (optionContent) {
                     const optionId = optionContent.dataset.optionId;
-                    const optionName = optionContent.textContent.trim();
-                    filtersData[inputId].value = { id: optionId, name: optionName };
+                    filtersData[inputId].value = optionId; // Сохраняем только id
                     dropdown.classList.remove('--open');
                 }
             }
@@ -163,20 +159,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         const searchInput = dropdownBody.querySelector('.filters-select__dropdown-input input');
-            if (searchInput) {
-                searchInput.addEventListener('input', function (event) {
-                    const searchText = event.target.value.toLowerCase();
-                    const options = dropdownBody.querySelectorAll('.filters-select__dropdown-option');
-                    options.forEach(option => {
-                        const optionText = option.querySelector('.filter-checkbox__text').textContent.toLowerCase();
-                        if (optionText.includes(searchText)) {
-                            option.style.display = '';
-                        } else {
-                            option.style.display = 'none';
-                        }
-                    });
+        if (searchInput) {
+            searchInput.addEventListener('input', function (event) {
+                const searchText = event.target.value.toLowerCase();
+                const options = dropdownBody.querySelectorAll('.filters-select__dropdown-option');
+                options.forEach(option => {
+                    const optionText = option.querySelector('.filter-checkbox__text').textContent.toLowerCase();
+                    if (optionText.includes(searchText)) {
+                        option.style.display = '';
+                    } else {
+                        option.style.display = 'none';
+                    }
                 });
-            }
+            });
+        }
     });
 
     document.addEventListener('click', function (event) {
@@ -196,15 +192,20 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!filtersData[inputId]) return;
 
         if (filtersData[inputId].type === 'checkbox') {
-            const selectedNames = filtersData[inputId].selected.map(item => item.name);
+            const selectedNames = filtersData[inputId].value.map(id => {
+                const option = selectsData[inputId].options.find(opt => opt.id === id);
+                return option ? option.name : '';
+            });
             updateInputValue(input, selectedNames);
             updateFooter(inputId, footer);
         } else {
-            const selectedOption = filtersData[inputId].value;
+            const selectedOption = selectsData[inputId].options.find(
+                opt => opt.id === filtersData[inputId].value
+            );
             input.value = selectedOption ? selectedOption.name : '';
         }
 
-        updateStore('filtersData', filtersData);
+        updateStore('selectsData', filtersData);
     }
 
     function updateInputValue(input, selectedOptionsArray) {
@@ -222,18 +223,21 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateFooter(dropdownId, footer) {
         if (!footer) return;
         let selectedItemsContainer = footer.querySelector('.filters-form__selected-items');
-        if (filtersData[dropdownId].selected.length > 0) {
+        if (filtersData[dropdownId].value.length > 0) {
             if (!selectedItemsContainer) {
                 selectedItemsContainer = document.createElement('div');
                 selectedItemsContainer.classList.add('filters-form__selected-items');
                 footer.appendChild(selectedItemsContainer);
             }
             selectedItemsContainer.innerHTML = '';
-            filtersData[dropdownId].selected.forEach(item => {
+            filtersData[dropdownId].value.forEach(id => {
+                const option = selectsData[dropdownId].options.find(opt => opt.id === id);
+                if (!option) return;
+
                 const selectedItem = document.createElement('div');
                 selectedItem.classList.add('filters-form__selected-item', 'selected-item');
                 selectedItem.innerHTML = `
-                    <div class="selected-item__text">${item.name}</div>
+                    <div class="selected-item__text">${option.name}</div>
                     <button class="selected-item__cross" type="button">
                         <span></span>
                         <span></span>
@@ -241,15 +245,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
                 const crossButton = selectedItem.querySelector('.selected-item__cross');
                 crossButton.addEventListener('click', function (event) {
-                    event.preventDefault(); // Отменяем стандартное действие, если необходимо
-                    const index = filtersData[dropdownId].selected.findIndex(
-                        selected => selected.id === item.id
+                    event.preventDefault();
+                    filtersData[dropdownId].value = filtersData[dropdownId].value.filter(
+                        selectedId => selectedId !== id
                     );
-                    if (index > -1) {
-                        filtersData[dropdownId].selected.splice(index, 1);
-                    }
                     const checkbox = [...document.querySelectorAll(`.filters-select__dropdown[data-dropdown-content="${dropdownId}"] .filters-select__dropdown-option input[type="checkbox"]`)]
-                        .find(cb => cb.nextElementSibling.nextElementSibling.textContent.trim() === item.name);
+                        .find(cb => cb.value === id);
                     if (checkbox) {
                         checkbox.checked = false;
                     }
@@ -286,8 +287,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const anySelected =
             filtersData[dropdownId] &&
             (filtersData[dropdownId].type === 'checkbox'
-                ? filtersData[dropdownId].selected.length > 0
-                : filtersData[dropdownId].value !== '');
+                ? filtersData[dropdownId].value.length > 0
+                : filtersData[dropdownId].value !== null);
         clearButton.style.display = anySelected ? 'block' : 'none';
     }
 });

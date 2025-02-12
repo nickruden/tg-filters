@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const rangeId = startInput.getAttribute('data-range-id');
 
         filtersData[rangeId] = {
+            type: 'range',
             value: {
-                From: '',
-                To: ''
+                From: null,
+                To: null,
             },
         };
 

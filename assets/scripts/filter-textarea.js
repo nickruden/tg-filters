@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     textAreas.forEach(textArea => {
         const textAreaId = textArea.getAttribute('id');
         filtersData[textAreaId] = {
-            value: ''
+            value: null,
         };
 
         const clearButton = Array.from(clearButtons).find(btn => btn.getAttribute('data-target') === textAreaId);

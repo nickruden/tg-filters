@@ -4,8 +4,7 @@ let timeoutId;
 
 export function updateStore(key, value) {
   filtersData[key] = value;
-  console.log(Object.values(filtersData))
-  // debouncedFetch();
+  debouncedFetch();
 }
 
 function debouncedFetch() {
@@ -17,12 +16,22 @@ function debouncedFetch() {
 
 const buildQueryString = (data) => {
   let params = [];
-  // console.log(Object.entries(data));
 
   Object.entries(data).map(([key, value]) => {
+    console.log(Object.entries(value))
     Object.entries(value).map(([key, value]) => {
-      let mergeData = `${key}=${value.value}`
-      // console.log(key, value, mergeData)
+      let mergeData = ``;
+      // ПРОВЕРКА НА ПУСТОЕ ЗНАЧЕНИЕ И ОБЪЕКТ
+      if ((typeof value.value == 'object') || !(value.value)) {
+        // Если массив, то просто перечисление
+        if (Array.isArray(value.value)) {
+          mergeData = `${key}=${value.value.join(',')}`;
+          params.push(mergeData);
+        }
+      } else {
+        mergeData = `${key}=${value.value}`
+        params.push(mergeData);
+      }
   })
   })
 
@@ -31,7 +40,7 @@ const buildQueryString = (data) => {
 
 function sendToServer(data) {
   const queryString = buildQueryString(data);
-  // console.log(queryString)
+  console.log('Итоговая строка запроса: ', queryString)
   // fetch('/api/update', {
   //   method: 'POST',
   //   body: JSON.stringify(data),

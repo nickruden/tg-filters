@@ -6,15 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const filtersData = {};
 
     rangeInputs.forEach(rangeInput => {
-        const startInput = rangeInput.querySelector('.filters-input__field[name*="Start"]');
-        const endInput = rangeInput.querySelector('.filters-input__field[name*="End"]');
+        const startInput = rangeInput.querySelector('.filters-input__field[name*="From"]');
+        const endInput = rangeInput.querySelector('.filters-input__field[name*="To"]');
         const rangeId = startInput.getAttribute('data-range-id');
 
         filtersData[rangeId] = {
-            type: `range${rangeId.charAt(0).toUpperCase() + rangeId.slice(1)}`,
             value: {
-                start: '',
-                end: ''
+                From: '',
+                To: ''
             },
         };
 
@@ -23,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (clearButton) {
             clearButton.addEventListener('click', function (event) {
                 event.preventDefault();
-                filtersData[rangeId].value.start = '';
-                filtersData[rangeId].value.end = '';
+                filtersData[rangeId].value.From = '';
+                filtersData[rangeId].value.To = '';
                 startInput.value = '';
                 endInput.value = '';
                 updateClearButtonVisibility(rangeId);
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 value = Number(value).toLocaleString('ru-RU');
                 event.target.value = value;
             }
-            filtersData[rangeId].start = event.target.value;
+            filtersData[rangeId].value.From = event.target.value;
             updateClearButtonVisibility(rangeId);
             updateStore("doubleInputsData", filtersData);
             console.log(filtersData);
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 value = Number(value).toLocaleString('ru-RU');
                 event.target.value = value;
             }
-            filtersData[rangeId].end = event.target.value;
+            filtersData[rangeId].value.To = event.target.value;
             updateClearButtonVisibility(rangeId);
             updateStore("doubleInputsData", filtersData);
             console.log(filtersData);

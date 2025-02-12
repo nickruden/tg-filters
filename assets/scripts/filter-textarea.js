@@ -5,10 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const clearButtons = document.querySelectorAll('.filters-form__element-clear');
     const filtersData = {};
 
+    const inputTransformValue = inputValue => {
+        return encodeURIComponent(inputValue);
+    };
+
     textAreas.forEach(textArea => {
         const textAreaId = textArea.getAttribute('id');
         filtersData[textAreaId] = {
-           type: 'textarea',
             value: ''
         };
 
@@ -22,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
         textArea.addEventListener('input', function(event) {
-            filtersData[textAreaId].value = event.target.value;
+            filtersData[textAreaId].value = inputTransformValue(event.target.value);
             updateClearButtonVisibility(textAreaId);
         })
 

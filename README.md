@@ -1,7 +1,4 @@
 # Фильтры
-## Быстрый доступ: <br>
-- 
-
 ---
 ## Общая информация о элементах
 :exclamation: :exclamation: :exclamation: Каждый элемент имеет _общую структуру_, в которой _нельзя ничего убирать или менять_ :exclamation: :exclamation: :exclamation: <br>

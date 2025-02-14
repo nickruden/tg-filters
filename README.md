@@ -17,6 +17,42 @@
 - **element-bottom** - необходим для служебной информации некоторых элементов <br> <br> 
 :exclamation: :exclamation: :exclamation: ДЛЯ ПРАВИЛЬНОЙ ЛОГИКИ РАБОТЫ, ВАЖНО СОХРАНИТЬ СТРУКТУРУ КАЖОЙ ЧАСТИ ЭЛЕЛЕМЕНТА :exclamation: :exclamation: :exclamation:
 ---
+## Общая информация о блоках
+Блоки элементов имеют также свою структуру
+```HTML
+<div class="filters-form__block">
+  <div class="filters-form__block-header"></div>
+  <div class="filters-form__block-content">
+    <div class="filters-form__block-content-inner">...</div>
+  </div>
+</div>
+```
+- **filters-form__block-header** - используется для указания заголовка блока если он необходим;
+- **filters-form__block-content-inner** - содержит все элементы фильтров;
+
+:exclamation: :exclamation: :exclamation: Не важно есть заголовок или нет, обязательно создавать большие блоки фильтров в такой структуре :exclamation: :exclamation: :exclamation:
+
+Если есть заголовок необходимо следовать следующей структуре
+```HTML
+<div class="filters-form__block">
+    <div class="filters-form__block-header">
+        <div class="filters-form__block-title --title-section" data-toggle="options">
+            <h3 class="filters-form__block-title-text">Параметры</h3>
+            <button class="filters-form__block-title-button">
+                <div class="filters-select__icon">
+                    <svg иконка стрелочки>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="filters-form__block-content" data-block-content="options">
+        <div class="filters-form__block-content-inner">...</div>
+    </div>
+</div>
+```
+Необходимо создать элемент заголовка с классом ```---title-section``` и указанием самого заголовка внутри. Также надо использовать два атрибута для интерктивности(раскрытия блока): ```data-toggle``` и ```data-block-content```, они одинаковые для одного блока элементов, но разные для разных.
+
+---
 ## Создание элементов
 ### :bar_chart: <a id="createInputField">Поле ввода</a> :bar_chart:
 ```HTML

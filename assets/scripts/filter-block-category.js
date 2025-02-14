@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
             updateStore('categoryBlocksData', blockStates);
             dropdownOptions.appendChild(optionElement);
         });
+        const simpleBarInstance = new SimpleBar(dropdownOptions);
+            simpleBarInstance.recalculate();
     }
 
     // Функция для выбора опции

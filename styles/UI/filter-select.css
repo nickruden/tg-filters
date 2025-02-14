@@ -79,32 +79,6 @@
     gap: 8px;
 }
 
-.simplebar-track.simplebar-vertical {
-    top: 0;
-    width: 4px;
-    background: #F2F2F2;
-}
-
-.simplebar-scrollbar:before {
-    position: absolute;
-    content: '';
-    background: #0074D9;
-    border-radius: 0px;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    height: 100%;
-    width: 100%;
-    opacity: 1;
-    transition: none;
-}
-
-.simplebar-scrollbar.simplebar-visible:before {
-    opacity: 1;
-}
-
-
 .filters-form__selected-items {
     display: flex;
     flex-wrap: wrap;

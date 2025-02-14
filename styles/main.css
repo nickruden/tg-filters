@@ -102,7 +102,7 @@
     transition: transform 0.3s ease;
 }
 
-.simplebar-track.simplebar-vertical {
+/* .simplebar-track.simplebar-vertical {
     top: 0;
     width: 4px;
     background: #F2F2F2;
@@ -125,7 +125,7 @@
 
 .simplebar-scrollbar.simplebar-visible:before {
     opacity: 1;
-}
+} */
 
 
 /* БЛОК КАТЕГОРИИ */

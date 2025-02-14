@@ -6,14 +6,22 @@ const selectsData = {
         type: 'select',
         options: [
             { id: "no-complaints", name: "Нет жалоб" },
-            { id: "has-complaints", name: "Есть жалобы" }
+            { id: "has-compla1010ints", name: "Есть жалобы" },
         ]
     },
     stateControl: {
         type: 'select',
         options: [
-            { id: "no-complaints", name: "Нет жалоб" },
-            { id: "has-complaints", name: "Есть жалобы" }
+            { id: "no-complai2nts", name: "Нет жалоб" },
+            { id: "has-compl3aints", name: "Есть жалобы" },
+            { id: "no-complai4nts", name: "Нет жалоб" },
+            { id: "has-complai5nts", name: "Есть жалобы" },
+            { id: "no-complaint6s", name: "Нет жалоб" },
+            { id: "has-complaint7s", name: "Есть жалобы" },
+            { id: "no-complaint8s", name: "Нет жалоб" },
+            { id: "has-complaint9s", name: "Есть жалобы" },
+            { id: "no-complaints10", name: "Нет жалоб" },
+            { id: "has-complai11nts", name: "Есть жалобы" },
         ]
     },
     legislativeAct: {
@@ -126,6 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 dropdownOptions.appendChild(optionElement);
             });
+
+            const simpleBarInstance = new SimpleBar(dropdownOptions);
+            simpleBarInstance.recalculate();
         }
 
         dropdownBody.addEventListener('click', function (event) {
@@ -151,6 +162,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const optionId = optionContent.dataset.optionId;
                     filtersData[inputId].value = optionId; // Сохраняем только id
                     dropdown.classList.remove('--open');
+
+                    // Обновляем иконку
+            if (icon) {
+                icon.classList.remove('rotated');
+            }
                 }
             }
 

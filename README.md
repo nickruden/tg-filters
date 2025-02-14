@@ -18,7 +18,7 @@
 :exclamation: :exclamation: :exclamation: ДЛЯ ПРАВИЛЬНОЙ ЛОГИКИ РАБОТЫ, ВАЖНО СОХРАНИТЬ СТРУКТУРУ КАЖОЙ ЧАСТИ ЭЛЕЛЕМЕНТА :exclamation: :exclamation: :exclamation:
 ---
 ## Общая информация о блоках
-Блоки элементов имеют также свою структуру
+Блоки элементов имеют также свою структуру:
 ```HTML
 <div class="filters-form__block">
   <div class="filters-form__block-header"></div>
@@ -32,7 +32,7 @@
 
 :exclamation: :exclamation: :exclamation: Не важно есть заголовок или нет, обязательно создавать большие блоки фильтров в такой структуре
 
-Если есть заголовок необходимо следовать следующей структуре
+Если есть заголовок, необходимо следовать следующей структуре:
 ```HTML
 <div class="filters-form__block">
     <div class="filters-form__block-header">

@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function getBlockState(blockId) {
         if (!blockStates[blockId]) {
             blockStates[blockId] = {
+                type: 'categoryBlock',
                 value: {
                     category: null,
                     subcategory: null,
@@ -157,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
             optionElement.addEventListener('click', () =>
                 selectOption(blockId, option)
             );
+            updateStore('categoryBlocksData', blockStates);
             dropdownOptions.appendChild(optionElement);
         });
     }

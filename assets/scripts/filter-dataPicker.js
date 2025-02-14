@@ -37,9 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 onChange: function (selectedDates, dateStr) {
                     if (!filtersData[rangeId]) {
-                        filtersData[rangeId] = { from: '', to: '' };
+                        filtersData[rangeId] = {type: 'date', value: { from: '', to: '' }};
                     }
-                    filtersData[rangeId][isFromInput ? 'from' : 'to'] = dateStr;
+
+                    if (isFromInput) {
+                        filtersData[rangeId].value.from = dateStr;
+                    } else {
+                        filtersData[rangeId].value.to = dateStr;
+                    }
 
                     if (isFromInput) {
                         const toInputId = inputId.replace('From', 'To');
@@ -50,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     updateClearButtonVisibility(rangeId);
-                    console.log(filtersData);
                     updateStore("dateFiltersData", filtersData)
                 }
             });
@@ -79,16 +83,15 @@ document.addEventListener('DOMContentLoaded', function () {
             // Очищаем поля и данные
             if (fromInput && fromInput._flatpickr) {
                 fromInput._flatpickr.clear();
-                filtersData[target].from = '';
+                filtersData[target].value.from = '';
             }
             if (toInput && toInput._flatpickr) {
                 toInput._flatpickr.clear();
-                filtersData[target].to = '';
+                filtersData[target].value.to = '';
             }
 
             updateClearButtonVisibility(target);
             updateStore("dateFiltersData", filtersData)
-            console.log(filtersData); // Выводим текущее состояние filtersData
         });
     });
 
@@ -97,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateClearButtonVisibility(rangeId) {
         const clearButton = Array.from(clearButtons).find(btn => btn.getAttribute('data-target') === rangeId);
         if (!clearButton) return;
-        const anyValue = filtersData[rangeId] && (filtersData[rangeId].from !== '' || filtersData[rangeId].to !== '');
+        const anyValue = filtersData[rangeId] && (filtersData[rangeId].value.from !== '' || filtersData[rangeId].value.to !== '');
         clearButton.style.display = anyValue ? 'block' : 'none';
     }
 });

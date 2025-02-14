@@ -9,12 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Commissioner:100,200,300,regular,500,600,700,800,900"
         rel="stylesheet" />
 
-        <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
-      />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="./assets/libs/simplebar/simplebar.css">
+    <link rel="stylesheet" href="./assets/libs/flatpickr/flatpickr.min.css">
 
 
     <link rel="stylesheet" href="./styles/reset.css">
@@ -709,11 +705,13 @@
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+<script src="./assets/libs/simplebar/simplebar.min.js"></script>
+<script src="./assets/libs/flatpickr/flatpickr.min.js"></script>
+<script src="./assets/libs/flatpickr/lang/ru.js"></script>
+
 
 <script type="module" src="./assets/scripts/store.js"></script>
+
 
 <script type="module" src="./assets/scripts/filters-select.js"></script>
 <script type="module" src="./assets/scripts/filter-textarea.js"></script>
@@ -721,67 +719,6 @@
 <script type="module" src="./assets/scripts/filter-dataPicker.js"></script>
 <script type="module" src="./assets/scripts/filter-block-category.js"></script>
 <script type="module" src="./assets/scripts/simple-element-parsing.js"></script>
-
-<!-- СКРИПТ ДЛЯ РАСКРЫТИЯ БЛОКОВ -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const headers = document.querySelectorAll('.filters-form__block-header');
-        headers.forEach(header => {
-            const checkButton = header.querySelector('[data-toggle]');
-            if (checkButton) {
-                header.style.cursor = "pointer";
-            }
-            header.addEventListener('click', function (event) {
-                event.preventDefault();
-                const toggleButton = header.querySelector('[data-toggle]');
-                if (!toggleButton) {
-                    return;
-                }
-                const toggleType = toggleButton.getAttribute('data-toggle');
-                const contentBlock = document.querySelector(`.dropdown-content-block [data-block-content="${toggleType}"]`);
-                const buttonIcon = toggleButton.querySelector('.filters-select__icon');
-
-                if (contentBlock) {
-                    if (header.classList.contains('active')) {
-                        contentBlock.style.maxHeight = '0px';
-                        header.classList.remove('active');
-                        buttonIcon.classList.remove('rotated');
-                        contentBlock.classList.remove('open');
-                    } else {
-                        contentBlock.style.maxHeight = `${contentBlock.scrollHeight}px`;
-                        header.classList.add('active');
-                        buttonIcon.classList.add('rotated');
-                        contentBlock.classList.add('open');
-                    }
-                    // Обработка завершения анимации
-                    contentBlock.addEventListener('transitionend', function () {
-                        if (contentBlock.style.maxHeight !== '0px') {
-                            contentBlock.style.maxHeight = 'none'; // Сбрасываем ограничение после анимации
-                        }
-                    }, { once: true });
-                }
-            });
-        });
-
-        // Обработка динамического изменения контента
-        const observer = new MutationObserver(function (mutations) {
-            mutations.forEach(mutation => {
-                if (mutation.type === 'childList' || mutation.type === 'attributes') {
-                    const openBlocks = document.querySelectorAll('.filters-form__block-content[style*="max-height"]');
-                    openBlocks.forEach(block => {
-                        if (block.style.maxHeight !== '0px') {
-                            block.style.maxHeight = `${block.scrollHeight}px`; // Обновляем max-height при изменении контента
-                        }
-                    });
-                }
-            });
-        });
-
-        const contentBlocks = document.querySelectorAll('.filters-form__block-content');
-        contentBlocks.forEach(block => {
-            observer.observe(block, { childList: true, attributes: true, subtree: true });
-        });
-    });
-</script>
+<script src="./assets/scripts/opne-block.js"></script>
 
 </html>
